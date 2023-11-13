@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
+    <!-- MDB -->
+    <link href="{% static 'account/css/mdb.css' %}" rel="stylesheet"/>
+    <link rel="stylesheet" href="{% static 'account/css/style.css' %} "/>
+    <title>Document</title>
+</head>
+<body>
+<section
+        class="vh-100 bg-image"
+        {#      style="#}
+        {#        background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');#}
+        {#      "#}
+>
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+        <div class="container h-100">
+            <div
+                    class="row d-flex justify-content-center align-items-center h-100"
+            >
+                <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                    <div class="card" style="border-radius: 15px">
+                        <div class="card-body p-5">
+                            <h2 class="text-uppercase text-center mb-5">
+                                Login
+                            </h2>
+                            {% if not user_is_exist %}
+                                <div class="alert alert-danger" role="alert">{{ error_message }}</div>
+                            {% elif error_password %}
+                                <p class="alert alert-danger text-center">{{ error_message }}</p>
+                            {% endif %}
+                            <form action="" method="POST">
+                                {% csrf_token %}
+                                <!-- Email input -->
+                                <div class="form-outline mb-4">
+                                    <input type="email" id="form1Example1" class="form-control" name="email" required/>
+                                    <label class="form-label" for="form1Example1">Email address</label>
+                                </div>
+
+                                <!-- Password input -->
+                                <div class="form-outline mb-4">
+                                    <input type="password" id="form1Example2" class="form-control" name="password"
+                                           required/>
+                                    <label class="form-label" for="form1Example2">Password</label>
+                                </div>
+
+                                <!-- 2 column grid layout for inline styling -->
+                                <div class="row mb-4">
+                                    <div class="col d-flex justify-content-center">
+                                        <!-- Checkbox -->
+                                        <div class="form-check">
+                                            <input
+                                                    class="form-check-input"
+                                                    type="checkbox"
+                                                    value=""
+                                                    id="form1Example3"
+                                                    checked
+                                            />
+                                            <label class="form-check-label" for="form1Example3">
+                                                Remember me
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col">
+                                        <!-- Simple link -->
+                                        <a href="{% url 'forgot_password' %}">Forgot password?</a>
+                                    </div>
+                                </div>
+
+                                <!-- Submit button -->
+                                <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+                                <a type="button" class="btn btn-primary btn-block"
+                                   href="{% url 'sign_up' %}">Sign_up</a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MDB -->
+<script
+        type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.js"
+></script>
+</body>
+</html>
